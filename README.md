@@ -1,0 +1,2 @@
+# CornerBot-forKakaoTalk
+CornerBot
