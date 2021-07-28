@@ -1,0 +1,73 @@
+'''
+
+'''
+import requests
+from bs4 import BeautifulSoup
+normalurl = "https://newgh.gnu.ac.kr/cs/na/ntt/selectNttList.do?mi=6694&bbsId=2351"
+swurl = "https://newgh.gnu.ac.kr/cs/na/ntt/selectNttList.do?mi=6695&bbsId=2352"
+normalhref = "https://newgh.gnu.ac.kr/cs/na/ntt/selectNttInfo.do?mi=6694&bbsId=2351&nttSn="
+swhref = "https://newgh.gnu.ac.kr/cs/na/ntt/selectNttInfo.do?mi=6695&bbsId=2352&nttSn="
+normalstartingPoint = ""
+swstartingPoint = ""
+normaltemp = 0
+swtemp = 0
+
+
+def crolling_notice():
+    normal = requests.get(normalurl)
+    normalcroll = BeautifulSoup(normal.content, "lxml")
+    normalnotice = normalcroll.select("a.nttInfoBtn")
+    for d in normalnotice:
+        normalNoticetitle = d.text
+        normalNoticehref = normalhref+d.get("data-id")
+        print(normalNoticehref)
+        print(normalNoticetitle)
+
+def crolling_swnotice():
+    sw = requests.get(swurl)
+    swcroll = BeautifulSoup(sw.content, "lxml")
+    swnotice = swcroll.select("a.nttInfoBtn")
+    for c in swnotice:
+        swNoticetitle = c.text
+        swNoticehref = swhref + c.get("data-id")
+        print(swNoticetitle)
+        print(swNoticehref)
+
+def counting_normalnotice():
+    normal = requests.get(normalurl)
+    normalcroll = BeautifulSoup(normal.content, "lxml")
+    normalNoticeNumber = normalcroll.select("td.BD_tm_none")
+    for z in normalNoticeNumber:
+        normalpoint = z.text
+        if ("공지" != normalpoint):
+            if(int(normaltemp) < int(normalpoint)):
+                normaltemp = normalpoint
+    normalpoint = normaltemp
+    return normalpoint
+
+def counting_swnotice():
+    sw = requests.get(swurl)
+    swcroll = BeautifulSoup(sw.content, "lxml")
+    swNoticeNumber = swcroll.select("td.BD_tm_none")
+    for swnumber in swNoticeNumber:
+        swpoint = swnumber.text
+        if("공지" != swpoint):
+            if(int(swtemp) < int(swpoint)):
+                swtemp = swpoint
+    swpoint = swtemp
+    return swpoint
+
+def onstart():
+    swstartingPoint=counting_swnotice()
+    normalstartingPoint=counting_normalnotice()
+
+if __name__ == "__main__":
+    onstart()
+    while(1):
+        if(swstartingPoint != counting_swnotice()):
+            crolling_swnotice()
+        if(normalstartingPoint != counting_normalnotice()):
+            crolling_notice()
+
+
+
