@@ -33,7 +33,7 @@ def counting_normalnotice():
     for z in normalNoticeNumber:
         normalpoint = z.text
         if ("공지" != normalpoint):
-            if (int(normaltemp) < int(normalpoint)):
+            if(int(normaltemp) < int(normalpoint)):
                 normaltemp = normalpoint
 
     for z in normalNoticeNumber:
@@ -62,7 +62,7 @@ def counting_swnotice():
     for z in swNoticeNumber:
         swpoint = z.text
         if ("공지" != swpoint):
-            if (int(swtemp) < int(swpoint)):
+            if(int(swtemp) < int(swpoint)):
                 swtemp = swpoint
 
     for z in swNoticeNumber:
@@ -82,40 +82,47 @@ def Message():
 
     dataSend = {
         "version": "2.0",
-        "template": {
-            "outputs": [
+        "template":{
+            "outputs":[
                 {
-                    "listCard": {
+                    "listCard":{
                         "header": {
                             "title": "경상대학교 컴퓨터과학과 공지사항"
                         },
-                        "items": [
+                        "items":[
                             {
-                                "title": re.sub("\t|\r|\n", "", normalnotice[counts + 0].text),
+                                "title": re.sub("\t|\r|\n","",normalnotice[counts+0].text),
                                 "link": {
-                                    "web": normalhref + normalnotice[counts + 0].get("data-id")
+                                    "web" : normalhref+normalnotice[counts+0].get("data-id")
                                 }
                             },
                             {
-                                "title": re.sub("\t|\r|\n", "", normalnotice[counts + 1].text),
-                                "link": {
-                                    "web": normalhref + normalnotice[counts + 1].get("data-id")
+                                "title": re.sub("\t|\r|\n","",normalnotice[counts+1].text),
+                                "link":{
+                                    "web": normalhref+normalnotice[counts+1].get("data-id")
+                                }   
+                            },
+                                                        {
+                                "title": re.sub("\t|\r|\n","",normalnotice[counts+2].text),
+                                "link":{
+                                    "web": normalhref+normalnotice[counts+2].get("data-id")
+                                }   
+                            },
+                                                        {
+                                "title": re.sub("\t|\r|\n","",normalnotice[counts+3].text),
+                                "link":{
+                                    "web": normalhref+normalnotice[counts+3].get("data-id")
                                 }
                             },
-                            {
-                                "title": re.sub("\t|\r|\n", "", normalnotice[counts + 2].text),
-                                "link": {
-                                    "web": normalhref + normalnotice[counts + 2].get("data-id")
-                                }
-                            },
-                            {
-                                "title": re.sub("\t|\r|\n", "", normalnotice[counts + 3].text),
-                                "link": {
-                                    "web": normalhref + normalnotice[counts + 3].get("data-id")
+                            
+                                                        {
+                                "title": re.sub("\t|\r|\n","",normalnotice[counts+4].text),
+                                "link":{
+                                    "web": normalhref+normalnotice[counts+4].get("data-id")
                                 }
                             }
                         ],
-                        "buttons": [
+                        "buttons":[
                             {
                                 "label": "공지사항보기",
                                 "action": "webLink",
@@ -138,40 +145,46 @@ def swMessage():
 
     dataSend = {
         "version": "2.0",
-        "template": {
-            "outputs": [
+        "template":{
+            "outputs":[
                 {
-                    "listCard": {
+                    "listCard":{
                         "header": {
                             "title": "경상대학교 컴퓨터과학과 SW공지사항"
                         },
-                        "items": [
+                        "items":[
                             {
-                                "title": re.sub("\t|\r|\n", "", swnotice[swcounts + 0].text),
+                                "title": re.sub("\t|\r|\n","",swnotice[swcounts+0].text),
                                 "link": {
-                                    "web": swhref + swnotice[swcounts + 0].get("data-id")
+                                    "web" : swhref+swnotice[swcounts+0].get("data-id")
                                 }
                             },
                             {
-                                "title": re.sub("\t|\r|\n", "", swnotice[swcounts + 1].text),
-                                "link": {
-                                    "web": swhref + swnotice[swcounts + 1].get("data-id")
-                                }
+                                "title": re.sub("\t|\r|\n","",swnotice[swcounts+1].text),
+                                "link":{
+                                    "web": swhref+swnotice[swcounts+1].get("data-id")
+                                }   
                             },
-                            {
-                                "title": re.sub("\t|\r|\n", "", swnotice[swcounts + 2].text),
-                                "link": {
-                                    "web": swhref + swnotice[swcounts + 2].get("data-id")
-                                }
+                                                        {
+                                "title": re.sub("\t|\r|\n","",swnotice[swcounts+2].text),
+                                "link":{
+                                    "web": swhref+swnotice[swcounts+2].get("data-id")
+                                }   
                             },
-                            {
-                                "title": re.sub("\t|\r|\n", "", swnotice[swcounts + 3].text),
-                                "link": {
-                                    "web": swhref + swnotice[swcounts + 3].get("data-id")
-                                }
+                                                        {
+                                "title": re.sub("\t|\r|\n","",swnotice[swcounts+3].text),
+                                "link":{
+                                    "web": swhref+swnotice[swcounts+3].get("data-id")
+                                }   
+                            },
+                             {
+                                "title": re.sub("\t|\r|\n","",swnotice[swcounts+4].text),
+                                "link":{
+                                    "web": swhref+swnotice[swcounts+4].get("data-id")
+                                }   
                             }
                         ],
-                        "buttons": [
+                        "buttons":[
                             {
                                 "label": "공지사항보기",
                                 "action": "webLink",
@@ -184,6 +197,7 @@ def swMessage():
         }
     }
     return jsonify(dataSend)
+
 
 
 if __name__ == "__main__":
